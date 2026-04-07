@@ -17,9 +17,12 @@ app.get('/', (req,res)=> {
 
 import userRouter from './routes/user.routes.js';
 import adminRouter from './routes/admin.routes.js';
+import managerRouter from './routes/manager.routes.js';
 
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/admin', adminRouter);
+app.use('/api/v1/manager', managerRouter);
+
 
 app.listen(process.env.PORT, () => {
     console.log(`Server running on port http://localhost:${process.env.PORT}`);
