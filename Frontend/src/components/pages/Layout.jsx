@@ -7,6 +7,7 @@ export default function Layout({ title, children }) {
     // 🔹 Remove token (ya jo bhi use kar raha hai)
     localStorage.removeItem("token");
     localStorage.removeItem("user");
+    localStorage.removeItem("role");
 
     // 🔹 Redirect to login
     navigate("/login");

@@ -35,6 +35,9 @@ export default function Signup() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="absolute top-8 left-8">
+        <Link to='/' className="px-4 py-2 border rounded-lg cursor-pointer">Back</Link>
+      </div>
       <div className="bg-white p-8 rounded-2xl shadow w-full max-w-md">
         <h2 className="text-2xl font-bold mb-6 text-center">Signup</h2>
 
