@@ -16,10 +16,10 @@ app.get('/', (req,res)=> {
 
 
 import userRouter from './routes/user.routes.js';
+import adminRouter from './routes/admin.routes.js';
 
-app.use('/api/v1', userRouter);
-app.use('/api/v1', userRouter);
-
+app.use('/api/v1/users', userRouter);
+app.use('/api/v1/admin', adminRouter);
 
 app.listen(process.env.PORT, () => {
     console.log(`Server running on port http://localhost:${process.env.PORT}`);

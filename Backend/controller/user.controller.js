@@ -43,3 +43,33 @@ export const loginUser = async (req, res) => {
         res.status(500).json({ message: "Internal server error" });
     }
 }
+
+
+export const getUserProfile = async (req, res) => {
+    try {
+        const user = req.user;  
+        res.status(200).json({ user });
+    } catch (error) {
+        res.status(500).json({ message: "Internal server error" });
+
+    }
+}
+
+
+export const updateUserProfile = async (req, res) => {
+    try {
+        const user = req.user;  
+        const { name, email, phone, address } = req.body;
+
+        user.name = name || user.name;
+        user.email = email || user.email;
+        user.phone = phone || user.phone;
+        user.address = address || user.address;
+        await user.save();
+        res.status(200).json({ message: "Profile updated successfully", user });
+    } catch (error) {
+        res.status(500).json({ message: "Internal server error" });
+    }
+
+}
+    
