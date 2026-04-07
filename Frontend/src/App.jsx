@@ -1,13 +1,23 @@
-import { useState } from 'react'
-// import './App.css'
+import LandingPage from './components/pages/LandingPage'
+import { Routes, Route } from 'react-router-dom'
+import Login from './components/pages/Login.jsx'
+import Signup from './components/pages/SignUp.jsx'
+import AdminDashboard from './Admin/AdminDashboard.jsx'
+import UserDashboard from './User/UserDashboard.jsx'
+import ManagerDashboard from './Manager/ManagerDashboard.jsx'
 
 function App() {
 
   return (
     <>
-     <div className='text-3xl bg-red-400 text-green-500 font-bold text-center'>
-        hello world
-     </div>
+     <Routes>
+      <Route path="/" element={<LandingPage />} />
+      <Route path="/login" element={<div><Login /></div>} />
+      <Route path="/signup" element={<div><Signup /></div>} />
+      <Route path="/admin" element={<AdminDashboard />} />
+      <Route path="/manager" element={<ManagerDashboard />} />
+      <Route path="/user" element={<UserDashboard />} />
+     </Routes>
     </>
   )
 }
