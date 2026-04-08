@@ -1,4 +1,4 @@
-import LandingPage from './components/pages/LandingPage'
+import LandingPage from './components/pages/LandingPage.jsx'
 import { Routes, Route } from 'react-router-dom'
 import Login from './components/pages/Login.jsx'
 import Signup from './components/pages/SignUp.jsx'
