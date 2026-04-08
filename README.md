@@ -39,7 +39,7 @@ cd MERN-based-role-management-system
 
 4. Start the backend server:
    ```bash
-   npm start
+   npm run dev
    ```
 
    The backend server will run on `http://localhost:4000`.
