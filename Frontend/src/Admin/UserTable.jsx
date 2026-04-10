@@ -4,12 +4,13 @@ import AddUserForm from "./AddUserForm";
 
 const statusColor = {
   manager: "bg-yellow-500",
+  user: "bg-green-500",
   admin: "bg-blue-500",
   online: "bg-green-500",
   offline: "bg-red-500",
 };
 
-export default function ManagerTable() {
+export default function UserTable() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -22,22 +23,22 @@ export default function ManagerTable() {
         return;
       }
 
-      const response = await axios.get(`http://localhost:4000/api/v1/manager/viewAllUsers`, {
+      const response = await axios.get(`http://localhost:4000/api/v1/admin/viewAllUsers`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-
-      if (response.data.users) {
-        setUsers(response.data.users);
+    //   console.log("Fetched users:", response.data);
+      if (response.data) {
+        setUsers(response.data);
       } else {
-        console.log("Failed to fetch users.");
+        // console.log("Failed to fetch users.");
 
-        // alert("Failed to fetch users.");
+        alert("Failed to fetch users.");
       }
     } catch (error) {
-      console.error("Error fetching users:", error);
-      //   alert("An error occurred while fetching users.");
+    //   console.error("Error fetching users:", error);
+        alert("An error occurred while fetching users.");
     } finally {
       setLoading(false);
     }
@@ -104,7 +105,7 @@ export default function ManagerTable() {
           className="border border-gray-300 px-4 py-2 rounded w-full max-w-md"
         />
         <div className="flex space-x-4">
-            <AddUserForm roleType="manager" refreshUsers={fetchAllUsers} />
+            <AddUserForm roleType="user" refreshUsers={fetchAllUsers} />
           {/* <button className="ml-4 bg-red-500 text-white px-4 py-2 rounded">Clear</button> */}
         </div>
       </div>

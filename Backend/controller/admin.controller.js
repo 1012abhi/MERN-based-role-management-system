@@ -100,7 +100,7 @@ export const updateUser = async (req, res) => {
 // Can view profiles of all Users and Managers 
 export const viewAllUsers = async (req, res) => {
     try {
-        const users = await userModel.find();
+        const users = await userModel.find({ role: { $in: ['user'] } });
         res.status(200).json(users);
     } catch (error) {
         res.status(500).json({ message: "Internal server error", error: error.message });
