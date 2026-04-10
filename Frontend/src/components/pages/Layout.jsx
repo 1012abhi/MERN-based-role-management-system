@@ -1,5 +1,15 @@
 import { useNavigate } from "react-router-dom";
 
+
+const menuItems = [
+  { name: "Dashboard", path: "/admin/dashboard" },
+  { name: "Managers", path: "/admin/managers" },
+  // { name: "Users", path: "/admin/users" },
+  // { name: "Profile", path: "/admin/profile" },
+  // { name: "Settings", path: "/admin/settings" },
+  
+];
+
 export default function Layout({ title, children }) {
   const navigate = useNavigate();
 
@@ -20,9 +30,21 @@ export default function Layout({ title, children }) {
         <div>
           <h2 className="text-xl font-bold mb-8">RBAC System</h2>
           <ul className="space-y-4 text-sm">
-            <li className="hover:text-gray-300 cursor-pointer">Dashboard</li>
-            <li className="hover:text-gray-300 cursor-pointer">Profile</li>
-            <li className="hover:text-gray-300 cursor-pointer">Settings</li>
+            <li className="hover:text-gray-300 cursor-pointer">
+              <span onClick={() => navigate("/dashboard")}>Dashboard</span>
+            </li>
+            <li className="hover:text-gray-300 cursor-pointer">
+              <span onClick={() => navigate("/admin/managers")}>Managers</span>
+            </li>
+            {/* <li className="hover:text-gray-300 cursor-pointer">
+              <span onClick={() => navigate("/admin/users")}>Users</span>
+            </li>
+            <li className="hover:text-gray-300 cursor-pointer">
+              <span onClick={() => navigate("/admin/profile")}>Profile</span>
+            </li>
+            <li className="hover:text-gray-300 cursor-pointer">
+              <span onClick={() => navigate("/admin/settings")}>Settings</span>
+            </li> */}
           </ul>
         </div>
 

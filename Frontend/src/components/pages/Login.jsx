@@ -14,28 +14,23 @@ export default function Login() {
         email,
         password,
       });
-      console.log(response);
       
       const { token } = response.data;
       const { role } = response.data.user;
-      console.log('role:', role);
-      console.log('token:', token);
-
       
       localStorage.setItem("token", token);
       localStorage.setItem("role", role);
 
       if (role === "admin") {
-        navigate("/admin");
+        navigate("/admin/dashboard");
       } else if (role === "manager") {
         navigate("/manager");
       } else {
         navigate("/user");
       }
     } catch (error) {
-    console.log(error.response?.data);
       
-      // alert(error.response?.data?.message || "Login failed");
+      alert(error.response?.data?.message || "Login failed");
     }
   };
 

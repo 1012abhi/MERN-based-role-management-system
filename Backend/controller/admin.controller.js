@@ -67,6 +67,36 @@ export const editUser = async (req, res) => {
     }
 }
 
+// • Can delete Users
+export const deleteUser = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const user = await userModel.findByIdAndDelete(id);
+
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        res.status(200).json({ message: "User deleted successfully" });
+    } catch (error) {
+        res.status(500).json({ message: "Internal server error", error: error.message });
+    }
+}
+
+export const updateUser = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const { name, email, phone, } = req.body;
+        const user = await userModel.findByIdAndUpdate(id, { name, email, phone, role:'manager' }, { new: true });
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+        res.status(200).json({ message: "User updated successfully", user });   
+    } catch (error) {
+        res.status(500).json({ message: "Internal server error", error: error.message });
+    }
+}
+
 // Can view profiles of all Users and Managers 
 export const viewAllUsers = async (req, res) => {
     try {
