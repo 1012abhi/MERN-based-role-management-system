@@ -78,7 +78,7 @@ export default function ManagerTable() {
           Authorization: `Bearer ${token}`,
         },
       });
-      
+
       if (response.status === 200) {
         alert("User deleted successfully.");
         fetchAllUsers(); // Refresh the user list
@@ -104,7 +104,7 @@ export default function ManagerTable() {
           className="border border-gray-300 px-4 py-2 rounded w-full max-w-md"
         />
         <div className="flex space-x-4">
-            <AddUserForm roleType="manager" refreshUsers={fetchAllUsers} />
+          <AddUserForm roleType="manager" refreshUsers={fetchAllUsers} />
           {/* <button className="ml-4 bg-red-500 text-white px-4 py-2 rounded">Clear</button> */}
         </div>
       </div>
@@ -113,30 +113,31 @@ export default function ManagerTable() {
         <p className="text-center text-gray-600">Loading users...</p>
       ) : (
         <div className="overflow-x-auto">
-          <table className="min-w-full table-auto border border-gray-200">
-            <thead className="bg-gray-100">
-              <tr>
-                {/* <th className="px-4 py-2 text-left">Avatar</th> */}
-                <th className="px-4 py-2 text-left">Name</th>
-                <th className="px-4 py-2 text-left">Email</th>
-                <th className="px-4 py-2 text-left">Role</th>
-                <th className="px-4 py-2 text-left">Phone</th>
-                {/* <th className="px-4 py-2 text-left">Verified</th>
-                <th className="px-4 py-2 text-left">User Status</th> */}
-                <th className="px-4 py-2 text-left">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              { users?.length === 0 ? (
+          <div className="max-h-100 overflow-y-auto border border-gray-200 rounded-lg">
+            <table className="min-w-full table-auto">
+              <thead className="bg-gray-100 sticky top-0 z-10">
                 <tr>
-                  <td colSpan="5" className="text-center py-4">
-                    No users found
-                  </td>
+                  {/* <th className="px-4 py-2 text-left">Avatar</th> */}
+                  <th className="px-4 py-2 text-left">Name</th>
+                  <th className="px-4 py-2 text-left">Email</th>
+                  <th className="px-4 py-2 text-left">Role</th>
+                  <th className="px-4 py-2 text-left">Phone</th>
+                  {/* <th className="px-4 py-2 text-left">Verified</th>
+                <th className="px-4 py-2 text-left">User Status</th> */}
+                  <th className="px-4 py-2 text-left">Action</th>
                 </tr>
-              ) :
-                users?.map((user, idx) => (
-                  <tr key={idx} className="border-t border-gray-200">
-                    {/* <td className="px-4 py-2">
+              </thead>
+              <tbody>
+                {users?.length === 0 ? (
+                  <tr>
+                    <td colSpan="5" className="text-center py-4">
+                      No users found
+                    </td>
+                  </tr>
+                ) :
+                  users?.map((user, idx) => (
+                    <tr key={idx} className="border-t border-gray-200">
+                      {/* <td className="px-4 py-2">
                     <img
                       src={
                         user?.profilePicture ||
@@ -151,17 +152,17 @@ export default function ManagerTable() {
                       }}
                     />
                   </td> */}
-                    <td className="px-4 py-2">{user.name || "N/A"}</td>
-                    <td className="px-4 py-2">{user.email}</td>
-                    <td className="px-4 py-2">
-                      <span
-                        className={`text-white px-3 py-1 rounded text-sm ${statusColor[user.role]}`}
-                      >
-                        {user.role}
-                      </span>
-                    </td>
-                    <td className="px-4 py-2">{user.phone || "N/A"}</td>
-                    {/* <td className="px-4 py-2">
+                      <td className="px-4 py-2">{user.name || "N/A"}</td>
+                      <td className="px-4 py-2">{user.email}</td>
+                      <td className="px-4 py-2">
+                        <span
+                          className={`text-white px-3 py-1 rounded text-sm ${statusColor[user.role]}`}
+                        >
+                          {user.role}
+                        </span>
+                      </td>
+                      <td className="px-4 py-2">{user.phone || "N/A"}</td>
+                      {/* <td className="px-4 py-2">
                     {user.isVerified ? (
                       <span className="text-green-500 font-semibold">Yes</span>
                     ) : (
@@ -175,31 +176,32 @@ export default function ManagerTable() {
                       {user.status || "offline"}
                     </span>
                   </td> */}
-                    <td className="px-4 py-2 space-x-2">
-                      <button
-                        className="bg-blue-500 text-white px-2 py-1 rounded"
-                        onClick={() =>
-                          handleUpdateUser(user._id, {
-                            name: "Updated Name",
-                            email: "updated.email@example.com",
-                            phone: "123-456-7890",
-                            // role: "user",
-                          })
-                        }
-                      >
-                        ✏️
-                      </button>
-                      <button
-                        className="bg-red-500 text-white px-2 py-1 rounded"
-                        onClick={() => handleDeleteUser(user._id)}
-                      >
-                        🗑️
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
+                      <td className="px-4 py-2 space-x-2">
+                        <button
+                          className="bg-blue-500 text-white px-2 py-1 rounded"
+                          onClick={() =>
+                            handleUpdateUser(user._id, {
+                              name: "Updated Name",
+                              email: "updated.email@example.com",
+                              phone: "123-456-7890",
+                              // role: "user",
+                            })
+                          }
+                        >
+                          ✏️
+                        </button>
+                        <button
+                          className="bg-red-500 text-white px-2 py-1 rounded"
+                          onClick={() => handleDeleteUser(user._id)}
+                        >
+                          🗑️
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       )}
     </div>

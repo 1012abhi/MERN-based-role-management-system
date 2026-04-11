@@ -29,7 +29,7 @@ export default function Layout({ title, children }) {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex">
+    <div className="h-screen bg-gray-100 flex">
       
       {/* Sidebar */}
       <aside className="w-64 bg-black text-white p-6 hidden md:flex flex-col justify-between">
@@ -60,7 +60,7 @@ export default function Layout({ title, children }) {
       </aside>
 
       {/* Main Content */}
-      <div className="flex-1 p-6">
+      <div className="h-screen flex-1 p-6">
         <h1 className="text-2xl font-bold mb-6">{title}</h1>
         {children}
       </div>
