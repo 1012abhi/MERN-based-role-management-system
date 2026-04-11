@@ -17,7 +17,7 @@ export const authUser = async (req, res, next) => {
             console.log('decoded is not found');
             
         }
-        const user = await userModel.findById(decoded._id)
+        const user = await userModel.findById(decoded._id).select("-password");
         if(!user) {
             console.log('user not found');
 

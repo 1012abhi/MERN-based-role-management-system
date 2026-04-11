@@ -181,7 +181,7 @@ export default function UserTable() {
                   </td> */}
                     <td className="px-4 py-2 space-x-2">
                       <button
-                        className="bg-blue-500 text-white px-2 py-1 rounded"
+                        className="bg-blue-500 text-white px-2 py-1 rounded cursor-pointer"
                         onClick={() => navigate(`/user/profile/${user._id}`)}
                         // onClick={() =>
                         //   handleUpdateUser(user._id, {
@@ -195,7 +195,7 @@ export default function UserTable() {
                         ✏️
                       </button>
                       <button
-                        className="bg-red-500 text-white px-2 py-1 rounded"
+                        className="bg-red-500 text-white px-2 py-1 rounded cursor-pointer"
                         onClick={() => handleDeleteUser(user._id)}
                       >
                         🗑️
