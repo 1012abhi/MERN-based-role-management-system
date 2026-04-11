@@ -12,7 +12,16 @@ const statusColor = {
 export default function ManagerTable() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState("");
 
+  const filteredUsers = users.filter((user) => {
+    return (
+      user.name?.toLowerCase().includes(search.toLowerCase()) ||
+      user.email?.toLowerCase().includes(search.toLowerCase()) ||
+      user.role?.toLowerCase().includes(search.toLowerCase()) ||
+      user.phone?.includes(search)
+    );
+  });
 
   const fetchAllUsers = async () => {
     try {
@@ -101,6 +110,8 @@ export default function ManagerTable() {
         <input
           type="text"
           placeholder="Search here..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
           className="border border-gray-300 px-4 py-2 rounded w-full max-w-md"
         />
         <div className="flex space-x-4">
@@ -128,14 +139,14 @@ export default function ManagerTable() {
                 </tr>
               </thead>
               <tbody>
-                {users?.length === 0 ? (
+                {filteredUsers?.length === 0 ? (
                   <tr>
                     <td colSpan="5" className="text-center py-4">
                       No users found
                     </td>
                   </tr>
                 ) :
-                  users?.map((user, idx) => (
+                  filteredUsers?.map((user, idx) => (
                     <tr key={idx} className="border-t border-gray-200">
                       {/* <td className="px-4 py-2">
                     <img

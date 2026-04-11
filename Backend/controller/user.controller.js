@@ -48,7 +48,6 @@ export const loginUser = async (req, res) => {
 export const getUserById = async (req, res) => {
   try {
     const user = await userModel.findById(req.params.id).select("-password");
-    console.log('user', user);
     
     if (!user) {
       return res.status(404).json({ message: "User not found" });
