@@ -26,7 +26,7 @@ export default function Login() {
       } else if (role === "manager") {
         navigate("/manager/dashboard");
       } else {
-        navigate("/user");
+        navigate("/user/dashboard");
       }
     } catch (error) {
       

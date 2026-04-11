@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import AddUserForm from "./AddUserForm";
+import { useNavigate } from "react-router-dom";
 
 const statusColor = {
   manager: "bg-yellow-500",
@@ -13,7 +14,8 @@ const statusColor = {
 export default function UserTable() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  const role = localStorage.getItem("role");
+  const navigate = useNavigate();
 
   const fetchAllUsers = async () => {
     try {
@@ -28,7 +30,7 @@ export default function UserTable() {
           Authorization: `Bearer ${token}`,
         },
       });
-    //   console.log("Fetched users:", response.data);
+      //   console.log("Fetched users:", response.data);
       if (response.data) {
         setUsers(response.data);
       } else {
@@ -37,8 +39,8 @@ export default function UserTable() {
         alert("Failed to fetch users.");
       }
     } catch (error) {
-    //   console.error("Error fetching users:", error);
-        alert("An error occurred while fetching users.");
+      //   console.error("Error fetching users:", error);
+      alert("An error occurred while fetching users.");
     } finally {
       setLoading(false);
     }
@@ -79,7 +81,7 @@ export default function UserTable() {
           Authorization: `Bearer ${token}`,
         },
       });
-      
+
       if (response.status === 200) {
         alert("User deleted successfully.");
         fetchAllUsers(); // Refresh the user list
@@ -105,8 +107,9 @@ export default function UserTable() {
           className="border border-gray-300 px-4 py-2 rounded w-full max-w-md"
         />
         <div className="flex space-x-4">
+          {(role === "admin" || role === "manager") && (
             <AddUserForm roleType="user" refreshUsers={fetchAllUsers} />
-          {/* <button className="ml-4 bg-red-500 text-white px-4 py-2 rounded">Clear</button> */}
+          )}
         </div>
       </div>
 
@@ -128,7 +131,7 @@ export default function UserTable() {
               </tr>
             </thead>
             <tbody>
-              { users?.length === 0 ? (
+              {users?.length === 0 ? (
                 <tr>
                   <td colSpan="5" className="text-center py-4">
                     No users found
@@ -179,14 +182,15 @@ export default function UserTable() {
                     <td className="px-4 py-2 space-x-2">
                       <button
                         className="bg-blue-500 text-white px-2 py-1 rounded"
-                        onClick={() =>
-                          handleUpdateUser(user._id, {
-                            name: "Updated Name",
-                            email: "updated.email@example.com",
-                            phone: "123-456-7890",
-                            // role: "user",
-                          })
-                        }
+                        onClick={() => navigate(`/user/profile/${user._id}`)}
+                        // onClick={() =>
+                        //   handleUpdateUser(user._id, {
+                        //     name: "Updated Name",
+                        //     email: "updated.email@example.com",
+                        //     phone: "123-456-7890",
+                        //     // role: "user",
+                        //   })
+                        // }
                       >
                         ✏️
                       </button>
